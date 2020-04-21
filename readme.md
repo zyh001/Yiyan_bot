@@ -1,7 +1,7 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
    <body marginheight="0"><h2>情话一言 Telegram bot</h2>
-<p>这是为<a href="t.me/qinghua_box">情话箱</a>频道开发的一言机器，基于本地数据库
+<p>这是为<a href="https://t.me/qinghua_box">情话箱</a>频道开发的一言机器，基于本地数据库
 
 </p>
 <h3>开始使用</h3>
