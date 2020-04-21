@@ -1,0 +1,14 @@
+{
+  "name": "qhyiyanbot",
+  "version": "1.0.0",
+  "description": "一个一言机器人telegram",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "zyh001",
+  "license": "WTFPL",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "node-telegram-bot-api": "^0.30.0"
+  }
+}
