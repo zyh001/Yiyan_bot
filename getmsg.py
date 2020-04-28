@@ -6,7 +6,7 @@ bot = TelegramClient('🐶机器人', api_id, api_hash)
 channel = 'https://t.me/qinghua_box'
  
 async def main():
-    messages = bot.iter_messages(channel, limit=100)
+    messages = bot.iter_messages(channel, limit=50)
     msges = '';
     async for message in messages:
         msg = str(message.message)
