@@ -9,6 +9,19 @@ update_db(){
 	mv ./db1.txt db.txt
 	echo 0 > /tmp/getyiyan.temp
 }
+if [[ ! -z ${1} ]];then
+	text=${1}
+	checkt="$(python3 ./test.py ${text} 2>/dev/null)"
+	if [[ -z ${checkt} ]];then
+		echo "未能匹配到一致成分！"
+	else
+		str1="$(echo ${checkt} | head -1)"
+		str2="$(echo ${str1} | awk -F' -> ' '{ print $1}')"
+		str3="$(echo ${str1} | awk -F' -> ' '{ print $2}')"
+		echo -e "发现相似句：\n${str3}\n相似度：${str2}\n请人工确认！"
+	fi
+	exit 0
+fi
 if [[ -f /tmp/getyiyan.temp ]];then
 	i=$(cat /tmp/getyiyan.temp)
 	if [[ ${i} == "10" ]];then
