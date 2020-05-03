@@ -26,4 +26,5 @@ with open(r'./db.txt','r') as tline:
             a = tf_similarity(s4, s5)
             if a > 0.7:
                 print('{} -> {}'.format(a,s))
+                exit(0)
 

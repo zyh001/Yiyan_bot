@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+cd "$(dirname "${BASH_SOURCE[0]}")"
 list=$(cat ./db.txt | wc -l)
 num=$(($RANDOM%list+1))
 update_db(){
