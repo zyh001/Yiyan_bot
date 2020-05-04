@@ -19,7 +19,7 @@ if [[ ! -z ${1} ]];then
 		str1="$(echo ${checkt} | head -1)"
 		str2="$(echo ${str1} | awk -F' -> ' '{ print $1}')"
 		str3="$(echo ${str1} | awk -F' -> ' '{ print $2}')"
-		echo -e "发现相似句：\n${str3}\n相似度：${str2}\n请人工确认！"
+		echo -e "发现相似句：\n\n\`${str3}\`\n\n相似度：*${str2}*\n请人工确认！"
 	fi
 	exit 0
 fi

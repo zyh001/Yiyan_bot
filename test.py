@@ -25,6 +25,7 @@ with open(r'./db.txt','r') as tline:
             s4 = find_chinese(s)
             a = tf_similarity(s4, s5)
             if a > 0.7:
-                print('{} -> {}'.format(a,s))
+                b = a*100
+                print('{:.2f}% -> {}'.format(b,s))
                 exit(0)
 
