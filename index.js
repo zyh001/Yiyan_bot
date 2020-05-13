@@ -17,3 +17,9 @@ bot.onText(/\/getqh/, function onLoveText(msg)
     }
   });
 });
+
+bot.onText(/\/check (.+)|\/check/, function onLoveText(msg,  match, rep, repMsg) 
+{
+	let message = bot.getMsgWithReply(repMsg);
+	exec('bash ./get.sh'+ message);
+});
