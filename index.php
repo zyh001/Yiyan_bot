@@ -1,6 +1,45 @@
 <?php
 header('X-Powered-By:Yiyan API');
 header('access-control-allow-origin:*');
+$redis = new Redis();
+$redis->connect('127.0.0.1', 1379);
+$redis->auth("5139916@hao");
+$key=get_real_ip();
+$limit="100";
+if (!$redis->exists($key)){
+    //第一次访问
+    $redis->set($key,1,12*60*60); // 设置过期时间并设置初始值1
+}else{
+    //已经记录过IP
+    if ($redis->get($key)<$limit){ //判断IP有没有到达拉黑阈值
+        $redis->incr($key); //次数加一
+    }else{
+//	    echo  '您当前可能已被反爬虫策略限制，请稍候重试！';exit;
+	    header('HTTP/1.1 503 Internal Server Error');exit(503);
+    }
+}
+function get_real_ip($type = 0,$adv=false) {
+    $type       =  $type ? 1 : 0;
+    static $ip  =   NULL;
+    if ($ip !== NULL) return $ip[$type];
+    if($adv){
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $arr    =   explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $pos    =   array_search('unknown',$arr);
+            if(false !== $pos) unset($arr[$pos]);
+            $ip     =   trim($arr[0]);
+        }elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip     =   $_SERVER['HTTP_CLIENT_IP'];
+        }elseif (isset($_SERVER['REMOTE_ADDR'])) {
+            $ip     =   $_SERVER['REMOTE_ADDR'];
+        }
+    }elseif (isset($_SERVER['REMOTE_ADDR'])) {
+        $ip     =   $_SERVER['REMOTE_ADDR'];
+    }
+    $long = sprintf("%u",ip2long($ip));
+    $ip   = $long ? array($ip, $long) : array('0.0.0.0', 0);
+    return $ip[$type];
+}
 if ($_GET['charset']=='GBK' ||$_GET['charset']=='gbk' || $_GET['charset']=='gb2312'){
   $array=file('db.txt');
   $line=count($array);
