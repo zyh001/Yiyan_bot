@@ -23,3 +23,8 @@ bot.onText(/\/check (.+)|\/check/, function onLoveText(msg,  match, rep, repMsg)
 	let message = bot.getMsgWithReply(repMsg);
 	exec('bash ./get.sh'+ message);
 });
+
+bot.onText(/\/start|\/help/, (msg, match) => {
+	const chatId = msg.chat.id;
+	bot.sendMessage(chatId, '戳 /getqh 获取一条甜甜的情话哟~');
+});
